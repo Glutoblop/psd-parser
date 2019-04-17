@@ -15,17 +15,13 @@
 //COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
 //OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Linq;
-using Ntreev.Library.Psd.Readers;
 using Ntreev.Library.Psd.Readers.LayerAndMaskInformation;
+using System;
+using System.Linq;
 
 namespace Ntreev.Library.Psd
 {
-    class PsdLayer : IPsdLayer
+    public class PsdLayer : IPsdLayer
     {
         private readonly PsdDocument document;
         private readonly LayerRecords records;
@@ -71,11 +67,11 @@ namespace Ntreev.Library.Psd
         {
             get { return this.records.Name; }
         }
-		
-		public bool IsVisible
-	    {
-			get { return (this.records.Flags & LayerFlags.Visible) != LayerFlags.Visible; }
-	    }
+
+        public bool IsVisible
+        {
+            get { return (this.records.Flags & LayerFlags.Visible) != LayerFlags.Visible; }
+        }
 
         public float Opacity
         {

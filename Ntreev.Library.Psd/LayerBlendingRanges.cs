@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Ntreev.Library.Psd
 {
-    class LayerBlendingRanges
+    public class LayerBlendingRanges
     {
         
     }

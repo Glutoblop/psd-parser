@@ -21,7 +21,7 @@ using System.Text;
 
 namespace Ntreev.Library.Psd
 {
-    class PsdReader : IDisposable
+    public class PsdReader : IDisposable
     {
         private readonly BinaryReader reader;
         private readonly PsdResolver resolver;

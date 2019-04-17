@@ -21,7 +21,7 @@ using System.IO;
 
 namespace Ntreev.Library.Psd
 {
-    class Channel : IChannel
+    public class Channel : IChannel
     {
         private byte[] data;
         private ChannelType type;
