@@ -26,13 +26,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("lnkD")]
     class Reader_lnkD : ResourceReaderBase
     {
-        public Reader_lnkD(PsdReader reader, long length)
+        public Reader_lnkD(PsdReader reader, Int64 length)
             : base(reader, length)
         {
             
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
             List<LinkedLayer> linkedLayers = new List<LinkedLayer>();

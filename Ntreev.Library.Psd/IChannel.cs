@@ -24,7 +24,7 @@ namespace Ntreev.Library.Psd
 {
     public interface IChannel
     {
-        byte[] Data
+        Byte[] Data
         {
             get;
         }

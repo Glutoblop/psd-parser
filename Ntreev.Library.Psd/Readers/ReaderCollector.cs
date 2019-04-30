@@ -26,7 +26,7 @@ namespace Ntreev.Library.Psd.Readers
 {
     static class ReaderCollector
     {
-        private static readonly Dictionary<string, Type> readers;
+        private static readonly Dictionary<String, Type> readers;
 
         static ReaderCollector()
         {
@@ -37,7 +37,7 @@ namespace Ntreev.Library.Psd.Readers
                               (item.Attributes & TypeAttributes.Abstract) != TypeAttributes.Abstract
                         select item;
 
-            readers = new Dictionary<string, Type>(query.Count());
+            readers = new Dictionary<String, Type>(query.Count());
 
             foreach (var item in query)
             {
@@ -51,17 +51,17 @@ namespace Ntreev.Library.Psd.Readers
             }
         }
 
-        public static ResourceReaderBase CreateReader(string resourceID, PsdReader reader, long length)
+        public static ResourceReaderBase CreateReader(String resourceID, PsdReader reader, Int64 length)
         {
             Type readerType = typeof(EmptyResourceReader);
             if (readers.ContainsKey(resourceID) == true)
             {
                 readerType = readers[resourceID];
             }
-            return TypeDescriptor.CreateInstance(null, readerType, new Type[] { typeof(PsdReader), typeof(long), }, new object[] { reader, length, }) as ResourceReaderBase;
+            return TypeDescriptor.CreateInstance(null, readerType, new Type[] { typeof(PsdReader), typeof(Int64), }, new Object[] { reader, length, }) as ResourceReaderBase;
         }
 
-        public static string GetDisplayName(Type type)
+        public static String GetDisplayName(Type type)
         {
             var attrs = type.GetCustomAttributes(typeof(ResourceIDAttribute), true);
 
@@ -69,7 +69,7 @@ namespace Ntreev.Library.Psd.Readers
             return attr.DisplayName;
         }
 
-        public static string GetDisplayName(string resourceID)
+        public static String GetDisplayName(String resourceID)
         {
             if (readers.ContainsKey(resourceID) == true)
             {

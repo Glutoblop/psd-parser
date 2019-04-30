@@ -25,17 +25,17 @@ namespace Ntreev.Library.Psd.Readers.ImageResources
     [ResourceID("1032", DisplayName = "GridAndGuides")]
     class Reader_GridAndGuides : ResourceReaderBase
     {
-        public Reader_GridAndGuides(PsdReader reader, long length)
+        public Reader_GridAndGuides(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
 
-            int version = reader.ReadInt32();
+            Int32 version = reader.ReadInt32();
 
             if (version != 1)
                 throw new InvalidFormatException();
@@ -43,15 +43,15 @@ namespace Ntreev.Library.Psd.Readers.ImageResources
             props["HorizontalGrid"] = reader.ReadInt32();
             props["VerticalGrid"] = reader.ReadInt32();
 
-            int guideCount = reader.ReadInt32();
+            Int32 guideCount = reader.ReadInt32();
 
-            List<int> hg = new List<int>();
-            List<int> vg = new List<int>();
+            List<Int32> hg = new List<Int32>();
+            List<Int32> vg = new List<Int32>();
 
-            for (int i = 0; i < guideCount; i++)
+            for (Int32 i = 0; i < guideCount; i++)
             {
-                int n = reader.ReadInt32();
-                byte t = reader.ReadByte();
+                Int32 n = reader.ReadInt32();
+                Byte t = reader.ReadByte();
 
                 if (t == 0)
                     vg.Add(n);

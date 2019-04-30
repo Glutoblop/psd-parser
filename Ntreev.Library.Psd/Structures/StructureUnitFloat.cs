@@ -32,7 +32,7 @@ namespace Ntreev.Library.Psd.Structures
 
         public StructureUnitFloat(PsdReader reader)
         {
-            string type = reader.ReadType();
+            String type = reader.ReadType();
           
             this.Add("Type", PsdUtility.ToUnitType(type));
             this.Add("Value", reader.ReadDouble());

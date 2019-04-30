@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("fxrp")]
     class Reader_fxrp : ResourceReaderBase
     {
-        public Reader_fxrp(PsdReader reader, long length)
+        public Reader_fxrp(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
             props["RefernecePoint"] = reader.ReadDoubles(2);

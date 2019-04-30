@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.ImageResources
     [ResourceID("1057", DisplayName = "Version")]
     class Reader_VersionInfo : ResourceReaderBase
     {
-        public Reader_VersionInfo(PsdReader reader, long length)
+        public Reader_VersionInfo(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties(5);
 

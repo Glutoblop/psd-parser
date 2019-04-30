@@ -33,7 +33,7 @@ namespace Ntreev.Library.PsdViewer
             if (imageSource.HasImage == false)
                 return null;
 
-            byte[] data = imageSource.MergeChannels();
+            Byte[] data = imageSource.MergeChannels();
             var channelCount = imageSource.Channels.Length;
             var pitch = imageSource.Width * imageSource.Channels.Length;
             var w = imageSource.Width;
@@ -57,14 +57,14 @@ namespace Ntreev.Library.PsdViewer
                         c.B = data[n++];
                         c.G = data[n++];
                         c.R = data[n++];
-                        c.A = (byte)System.Math.Round(data[n++] / 255f * imageSource.Opacity * 255f);
+                        c.A = (Byte)System.Math.Round(data[n++] / 255f * imageSource.Opacity * 255f);
                     }
                     else
                     {
                         c.B = data[n++];
                         c.G = data[n++];
                         c.R = data[n++];
-                        c.A = (byte)System.Math.Round(imageSource.Opacity * 255f);
+                        c.A = (Byte)System.Math.Round(imageSource.Opacity * 255f);
                     }
                     colors[k++] = c;
                 }

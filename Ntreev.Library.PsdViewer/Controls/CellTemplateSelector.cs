@@ -27,7 +27,7 @@ namespace Ntreev.Library.PsdViewer.Controls
 {
     class CellTemplateSelector : DataTemplateSelector
     {
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate SelectTemplate(Object item, DependencyObject container)
         {
             if (container is FrameworkElement fe)
             {

@@ -30,16 +30,16 @@ namespace Ntreev.Library.PsdViewer.Converters
     /// </summary>
     public class LevelToIndentConverter : IValueConverter
     {
-        public object Convert(object o, Type type, object parameter, CultureInfo culture)
+        public Object Convert(Object o, Type type, Object parameter, CultureInfo culture)
         {
-            return new Thickness((int)o * c_IndentSize, 0, 0, 0);
+            return new Thickness((Int32)o * c_IndentSize, 0, 0, 0);
         }
 
-        public object ConvertBack(object o, Type type, object parameter, CultureInfo culture)
+        public Object ConvertBack(Object o, Type type, Object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
 
-        private const double c_IndentSize = 19.0;
+        private const Double c_IndentSize = 19.0;
     }
 }

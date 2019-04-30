@@ -29,9 +29,9 @@ namespace Ntreev.Library.Psd
 
         public override PsdDocument GetDocument(Uri absoluteUri)
         {
-            string filename = absoluteUri.LocalPath;
+            String filename = absoluteUri.LocalPath;
             if (File.Exists(filename) == false)
-                throw new FileNotFoundException(string.Format("{0} 파일을 찾을 수 없습니다.", filename), filename);
+                throw new FileNotFoundException(String.Format("{0} 파일을 찾을 수 없습니다.", filename), filename);
 
             if (uriToDocuments.ContainsKey(absoluteUri) == false)
             {

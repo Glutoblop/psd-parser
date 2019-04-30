@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("iOpa")]
     class Reader_iOpa : ResourceReaderBase
     {
-        public Reader_iOpa(PsdReader reader, long length)
+        public Reader_iOpa(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
             props["Opacity"] = reader.ReadByte();

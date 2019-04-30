@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Ntreev.Library.Psd.Readers
 {
-    class ColorModeDataSectionReader : LazyValueReader<byte[]>
+    class ColorModeDataSectionReader : LazyValueReader<Byte[]>
     {
         public ColorModeDataSectionReader(PsdReader reader)
             : base(reader, null)
@@ -30,20 +30,20 @@ namespace Ntreev.Library.Psd.Readers
 
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadInt32();
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out byte[] value)
+        protected override void ReadValue(PsdReader reader, Object userData, out Byte[] value)
         {
             if (this.Length > 0)
             {
-                value = reader.ReadBytes((int)this.Length);
+                value = reader.ReadBytes((Int32)this.Length);
             }
             else
             {
-                value = new byte[] { };
+                value = new Byte[] { };
             }
         }
     }

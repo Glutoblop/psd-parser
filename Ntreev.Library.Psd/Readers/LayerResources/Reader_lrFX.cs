@@ -25,25 +25,25 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("lrFX")]
     class Reader_lrFX : ResourceReaderBase
     {
-        public Reader_lrFX(PsdReader reader, long length)
+        public Reader_lrFX(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             value = new Properties();
 
-            short version = reader.ReadInt16();
-            int count = reader.ReadInt16();
+            Int16 version = reader.ReadInt16();
+            Int32 count = reader.ReadInt16();
 
-            for (int i = 0; i < count; i++)
+            for (Int32 i = 0; i < count; i++)
             {
-                string _8bim = reader.ReadAscii(4);
-                string effectType = reader.ReadAscii(4);
-                int size = reader.ReadInt32();
-                long p = reader.Position;
+                String _8bim = reader.ReadAscii(4);
+                String effectType = reader.ReadAscii(4);
+                Int32 size = reader.ReadInt32();
+                Int64 p = reader.Position;
 
                 switch (effectType)
                 {

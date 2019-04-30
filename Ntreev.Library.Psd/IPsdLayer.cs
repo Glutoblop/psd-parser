@@ -28,11 +28,11 @@ namespace Ntreev.Library.Psd
 
         IPsdLayer[] Childs { get; }
 
-        bool IsClipping { get; }
+        Boolean IsClipping { get; }
 
         ILinkedLayer LinkedLayer { get; }
 
-        string Name { get; }
+        String Name { get; }
 
         IPsdLayer Parent { get; }
 
@@ -40,12 +40,12 @@ namespace Ntreev.Library.Psd
 
         PsdDocument Document { get; }
 
-        int Left { get; }
+        Int32 Left { get; }
 
-        int Top { get; }
+        Int32 Top { get; }
 
-        int Right { get; }
+        Int32 Right { get; }
 
-        int Bottom { get; }
+        Int32 Bottom { get; }
     }
 }

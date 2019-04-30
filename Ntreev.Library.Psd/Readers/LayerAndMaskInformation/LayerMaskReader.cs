@@ -36,12 +36,12 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             return instance.Value;
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadInt32();
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out LayerMask value)
+        protected override void ReadValue(PsdReader reader, Object userData, out LayerMask value)
         {
             LayerMask mask = new LayerMask();
             mask.Top = reader.ReadInt32();

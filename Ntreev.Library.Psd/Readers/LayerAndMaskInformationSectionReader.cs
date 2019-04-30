@@ -31,7 +31,7 @@ namespace Ntreev.Library.Psd.Readers
             
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out LayerAndMaskInformationSection value)
+        protected override void ReadValue(PsdReader reader, Object userData, out LayerAndMaskInformationSection value)
         {
             PsdDocument document = userData as PsdDocument;
 

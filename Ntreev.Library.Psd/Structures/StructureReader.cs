@@ -24,7 +24,7 @@ namespace Ntreev.Library.Psd.Structures
 {
     static class StructureReader
     {
-        public static object Read(string ostype, PsdReader reader)
+        public static Object Read(String ostype, PsdReader reader)
         {
             switch (ostype)
             {

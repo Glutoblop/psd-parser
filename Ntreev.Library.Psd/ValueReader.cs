@@ -26,14 +26,14 @@ namespace Ntreev.Library.Psd
     abstract class ValueReader<T>
     {
         private readonly PsdReader reader;
-        private readonly int readerVersion;
-        private readonly long position;
-        private readonly long length;
-        private readonly object userData;
+        private readonly Int32 readerVersion;
+        private readonly Int64 position;
+        private readonly Int64 length;
+        private readonly Object userData;
         private T value;
-        private bool isRead;
+        private Boolean isRead;
 
-        protected ValueReader(PsdReader reader, bool hasLength, object userData)
+        protected ValueReader(PsdReader reader, Boolean hasLength, Object userData)
         {
             if (hasLength == true)
             {
@@ -58,7 +58,7 @@ namespace Ntreev.Library.Psd
             this.reader.Position = this.position + this.length;
         }
 
-        protected ValueReader(PsdReader reader, long length, object userData)
+        protected ValueReader(PsdReader reader, Int64 length, Object userData)
         {
             if (length < 0)
                 throw new InvalidFormatException();
@@ -97,8 +97,8 @@ namespace Ntreev.Library.Psd
             {
                 if (this.isRead == false && this.length > 0)
                 {
-                    long position = reader.Position;
-                    int version = reader.Version;
+                    Int64 position = reader.Position;
+                    Int32 version = reader.Version;
                     this.Refresh();
                     reader.Position = position;
                     reader.Version = version;
@@ -107,26 +107,26 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public long Length
+        public Int64 Length
         {
             get { return this.length; }
         }
 
-        public long Position
+        public Int64 Position
         {
             get { return this.position; }
         }
 
-        public long EndPosition
+        public Int64 EndPosition
         {
             get { return this.position + this.length; }
         }
 
-        protected virtual long OnLengthGet(PsdReader reader)
+        protected virtual Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadLength();
         }
 
-        protected abstract void ReadValue(PsdReader reader, object userData, out T value);
+        protected abstract void ReadValue(PsdReader reader, Object userData, out T value);
     }
 }

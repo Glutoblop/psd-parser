@@ -28,25 +28,25 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 {
     class LayerResourceReader : LazyProperties
     {
-        public LayerResourceReader(PsdReader reader, long length)
+        public LayerResourceReader(PsdReader reader, Int64 length)
             : base(reader, length, null)
         {
             
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
 
             while (reader.Position < this.EndPosition)
             {
                 reader.ValidateSignature();
-                string resourceID = reader.ReadType();
-                long length = reader.ReadInt32();
+                String resourceID = reader.ReadType();
+                Int64 length = reader.ReadInt32();
                 length += length % 2;
 
                 ResourceReaderBase resourceReader = ReaderCollector.CreateReader(resourceID, reader, length);
-                string resourceName = ReaderCollector.GetDisplayName(resourceID);
+                String resourceName = ReaderCollector.GetDisplayName(resourceID);
 
                 props[resourceName] = resourceReader;
             }

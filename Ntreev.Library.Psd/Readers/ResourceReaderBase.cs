@@ -24,7 +24,7 @@ namespace Ntreev.Library.Psd.Readers
 {
     abstract class ResourceReaderBase : LazyProperties
     {
-        public ResourceReaderBase(PsdReader reader, long length)
+        public ResourceReaderBase(PsdReader reader, Int64 length)
             : base(reader, length, null)
         {
 

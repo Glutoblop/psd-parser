@@ -26,15 +26,15 @@ namespace Ntreev.Library.Psd.Structures
     {
         public StructureObjectArray(PsdReader reader)
         {
-            int version = reader.ReadInt32();
+            Int32 version = reader.ReadInt32();
             this.Add("Name", reader.ReadString());
             this.Add("ClassID", reader.ReadKey());
 
-            int count = reader.ReadInt32();
+            Int32 count = reader.ReadInt32();
 
             List<Properties> items = new List<Properties>();
 
-            for (int i = 0; i < count; i++)
+            for (Int32 i = 0; i < count; i++)
             {
                 Properties props = new Properties();
                 props.Add("Type1", reader.ReadKey());
@@ -42,7 +42,7 @@ namespace Ntreev.Library.Psd.Structures
 
 
                 props.Add("Type2", PsdUtility.ToUnitType(reader.ReadType()));
-                int d4 = reader.ReadInt32();
+                Int32 d4 = reader.ReadInt32();
                 props.Add("Values", reader.ReadDoubles(d4));
 
                 items.Add(props);

@@ -30,13 +30,13 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out PsdLayer[] value)
+        protected override void ReadValue(PsdReader reader, Object userData, out PsdLayer[] value)
         {
             PsdDocument document = userData as PsdDocument;
-            int layerCount = Math.Abs((int)reader.ReadInt16());
+            Int32 layerCount = Math.Abs((Int32)reader.ReadInt16());
 
             PsdLayer[] layers = new PsdLayer[layerCount];
-            for (int i = 0; i < layerCount; i++)
+            for (Int32 i = 0; i < layerCount; i++)
             {
                 layers[i] = new PsdLayer(reader, document);
             }

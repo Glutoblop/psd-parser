@@ -25,18 +25,18 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 {
     class ChannelsReader : LazyValueReader<Channel[]>
     {
-        public ChannelsReader(PsdReader reader, long length, PsdLayer layer)
+        public ChannelsReader(PsdReader reader, Int64 length, PsdLayer layer)
             : base(reader, length, layer)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out Channel[] value)
+        protected override void ReadValue(PsdReader reader, Object userData, out Channel[] value)
         {
             PsdLayer layer = userData as PsdLayer;
             LayerRecords records = layer.Records;
 
-            using (MemoryStream stream = new MemoryStream(reader.ReadBytes((int)this.Length)))
+            using (MemoryStream stream = new MemoryStream(reader.ReadBytes((Int32)this.Length)))
             using (PsdReader r = new PsdReader(stream, reader.Resolver, reader.Uri))
             {
                 r.Version = reader.Version;
@@ -46,7 +46,7 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             value = records.Channels;
         }
 
-        private void ReadValue(PsdReader reader, int depth, Channel[] channels)
+        private void ReadValue(PsdReader reader, Int32 depth, Channel[] channels)
         {
             foreach (var item in channels)
             {

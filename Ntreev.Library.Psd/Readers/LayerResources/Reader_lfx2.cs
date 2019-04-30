@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("lfx2")]
     class Reader_lfx2 : ResourceReaderBase
     {
-        public Reader_lfx2(PsdReader reader, long length)
+        public Reader_lfx2(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             reader.ValidateInt32(0, "lfx2 Version");
             value = new DescriptorStructure(reader, true);

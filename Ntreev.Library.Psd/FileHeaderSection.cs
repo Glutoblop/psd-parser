@@ -24,13 +24,13 @@ namespace Ntreev.Library.Psd
 {
     public struct FileHeaderSection
     {
-        public int Depth
+        public Int32 Depth
         {
             get;
             set;
         }
 
-        public int NumberOfChannels
+        public Int32 NumberOfChannels
         {
             get;
             set;
@@ -42,19 +42,19 @@ namespace Ntreev.Library.Psd
             set;
         }
 
-        public int Height
+        public Int32 Height
         {
             get;
             set;
         }
 
-        public int Width
+        public Int32 Width
         {
             get;
             set;
         }
 
-        public static FileHeaderSection FromFile(string filename)
+        public static FileHeaderSection FromFile(String filename)
         {
             using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (PsdReader reader = new PsdReader(stream, new PathResolver(), new Uri(Path.GetDirectoryName(filename))))

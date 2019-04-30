@@ -28,7 +28,7 @@ namespace Ntreev.Library.Psd
         private readonly Stream stream;
         private readonly Uri uri;
 
-        private int version = 1;
+        private Int32 version = 1;
 
         public PsdReader(Stream stream, PsdResolver resolver, Uri uri)
         {
@@ -43,24 +43,24 @@ namespace Ntreev.Library.Psd
             this.reader.Close();
         }
 
-        public string ReadType()
+        public String ReadType()
         {
             return this.ReadAscii(4);
         }
 
-        public string ReadAscii(int length)
+        public String ReadAscii(Int32 length)
         {
             return Encoding.ASCII.GetString(this.reader.ReadBytes(length));
         }
 
-        public bool VerifySignature()
+        public Boolean VerifySignature()
         {
             return this.VerifySignature(false);
         }
 
-        public bool VerifySignature(bool check64bit)
+        public Boolean VerifySignature(Boolean check64bit)
         {
-            string signature = this.ReadType();
+            String signature = this.ReadType();
 
             if (signature == "8BIM")
                 return true;
@@ -71,9 +71,9 @@ namespace Ntreev.Library.Psd
             return false;
         }
 
-        public void ValidateSignature(string signature)
+        public void ValidateSignature(String signature)
         {
-            string s = this.ReadType();
+            String s = this.ReadType();
             if(s != signature)
                 throw new InvalidFormatException();
         }
@@ -83,7 +83,7 @@ namespace Ntreev.Library.Psd
             this.ValidateSignature(false);
         }
 
-        public void ValidateSignature(bool check64bit)
+        public void ValidateSignature(Boolean check64bit)
         {
             if (this.VerifySignature(check64bit) == false)
                 throw new InvalidFormatException();
@@ -91,49 +91,49 @@ namespace Ntreev.Library.Psd
 
         public void ValidateDocumentSignature()
         {
-            string signature = this.ReadType();
+            String signature = this.ReadType();
 
             if (signature != "8BPS")
                 throw new InvalidFormatException();
         }
 
-        private void ValidateValue<T>(T value, string name, Func<T> readFunc)
+        private void ValidateValue<T>(T value, String name, Func<T> readFunc)
         {
             T v = readFunc();
-            if (object.Equals(value, v) == false)
+            if (Object.Equals(value, v) == false)
             {
                 throw new InvalidFormatException("{0}의 값이 {1}이 아닙니다.", name, value);
             }
         }
 
-        public void ValidateInt16(short value, string name)
+        public void ValidateInt16(Int16 value, String name)
         {
-            this.ValidateValue<short>(value, name, () => this.ReadInt16());
+            this.ValidateValue<Int16>(value, name, () => this.ReadInt16());
         }
 
-        public void ValidateInt32(int value, string name)
+        public void ValidateInt32(Int32 value, String name)
         {
-            this.ValidateValue<int>(value, name, () => this.ReadInt32());
+            this.ValidateValue<Int32>(value, name, () => this.ReadInt32());
         }
 
-        public void ValidateType(string value, string name)
+        public void ValidateType(String value, String name)
         {
-            this.ValidateValue<string>(value, name, () => this.ReadType());
+            this.ValidateValue<String>(value, name, () => this.ReadType());
         }
 
-        public string ReadPascalString(int modLength)
+        public String ReadPascalString(Int32 modLength)
         {
-            byte count = this.reader.ReadByte();
-            string text = string.Empty;
+            Byte count = this.reader.ReadByte();
+            String text = String.Empty;
             if (count == 0)
             {
                 Stream baseStream = this.reader.BaseStream;
                 baseStream.Position += modLength - 1;
                 return text;
             }
-            byte[] bytes = this.reader.ReadBytes(count);
+            Byte[] bytes = this.reader.ReadBytes(count);
             text = Encoding.UTF8.GetString(bytes);
-            for (int i = count + 1; (i % modLength) != 0; i++)
+            for (Int32 i = count + 1; (i % modLength) != 0; i++)
             {
                 Stream stream2 = this.reader.BaseStream;
                 stream2.Position += 1L;
@@ -141,17 +141,17 @@ namespace Ntreev.Library.Psd
             return text;
         }
 
-        public string ReadString()
+        public String ReadString()
         {
-            int length = this.ReadInt32();
+            Int32 length = this.ReadInt32();
             if (length == 0)
-                return string.Empty;
+                return String.Empty;
 
-            byte[] bytes = this.ReadBytes(length * 2);
-            for (int i = 0; i < length; i++)
+            Byte[] bytes = this.ReadBytes(length * 2);
+            for (Int32 i = 0; i < length; i++)
             {
-                int index = i * 2;
-                byte b = bytes[index];
+                Int32 index = i * 2;
+                Byte b = bytes[index];
                 bytes[index] = bytes[index + 1];
                 bytes[index + 1] = b;
             }
@@ -164,103 +164,103 @@ namespace Ntreev.Library.Psd
             return Encoding.Unicode.GetString(bytes, 0, length * 2);
         }
 
-        public string ReadKey()
+        public String ReadKey()
         {
-            int length = this.ReadInt32();
+            Int32 length = this.ReadInt32();
             length = (length > 0) ? length : 4;
             return this.ReadAscii(length);
         }
 
-        public int Read(byte[] buffer, int index, int count)
+        public Int32 Read(Byte[] buffer, Int32 index, Int32 count)
         {
             return this.reader.Read(buffer, index, count);
         }
 
-        public byte ReadByte()
+        public Byte ReadByte()
         {
             return this.reader.ReadByte();
         }
 
-        public char ReadChar()
+        public Char ReadChar()
         {
-            return (char)this.ReadByte();
+            return (Char)this.ReadByte();
         }
 
-        public byte[] ReadBytes(int count)
+        public Byte[] ReadBytes(Int32 count)
         {
             return this.reader.ReadBytes(count);
         }
 
-        public bool ReadBoolean()
+        public Boolean ReadBoolean()
         {
             return this.ReverseValue(this.reader.ReadBoolean());
         }
 
-        public double ReadDouble()
+        public Double ReadDouble()
         {
             return this.ReverseValue(this.reader.ReadDouble());
         }
 
-        public double[] ReadDoubles(int count)
+        public Double[] ReadDoubles(Int32 count)
         {
-            double[] values = new double[count];
-            for (int i = 0; i < count; i++)
+            Double[] values = new Double[count];
+            for (Int32 i = 0; i < count; i++)
             {
                 values[i] = this.ReadDouble();
             }
             return values;
         }
 
-        public short ReadInt16()
+        public Int16 ReadInt16()
         {
             return this.ReverseValue(this.reader.ReadInt16());
         }
 
-        public int ReadInt32()
+        public Int32 ReadInt32()
         {
             return this.ReverseValue(this.reader.ReadInt32());
         }
 
-        public long ReadInt64()
+        public Int64 ReadInt64()
         {
             return this.ReverseValue(this.reader.ReadInt64());
         }
 
-        public ushort ReadUInt16()
+        public UInt16 ReadUInt16()
         {
             return this.ReverseValue(this.reader.ReadUInt16());
         }
 
-        public uint ReadUInt32()
+        public UInt32 ReadUInt32()
         {
             return this.ReverseValue(this.reader.ReadUInt32());
         }
 
-        public ulong ReadUInt64()
+        public UInt64 ReadUInt64()
         {
             return this.ReverseValue(this.reader.ReadUInt64());
         }
 
-        public long ReadLength()
+        public Int64 ReadLength()
         {
             return this.version == 1 ? this.ReadInt32() : this.ReadInt64();
         }
 
-        public void Skip(int count)
+        public void Skip(Int32 count)
         {
             this.ReadBytes(count);
         }
 
-        public void Skip(char c)
+        public void Skip(Char c)
         {
-            char ch = this.ReadChar();
+            Char ch = this.ReadChar();
             if (ch != c)
                 throw new NotSupportedException();
         }
 
-        public void Skip(char c, int count)
+        public void Skip(Char c, Int32 count)
         {
-            for (int i = 0; i < count; i++)
+            for (Int32 i = 0; i < count; i++)
             {
                 this.Skip(c);
             }
@@ -298,18 +298,18 @@ namespace Ntreev.Library.Psd
             this.Skip(6);
         }
 
-        public long Position
+        public Int64 Position
         {
             get { return this.reader.BaseStream.Position; }
             set { this.reader.BaseStream.Position = value; }
         }
 
-        public long Length
+        public Int64 Length
         {
             get { return this.reader.BaseStream.Length; }
         }
 
-        public int Version
+        public Int32 Version
         {
             get { return this.version; }
             set 
@@ -336,58 +336,58 @@ namespace Ntreev.Library.Psd
             get { return this.uri; }
         }
 
-        private bool ReverseValue(bool value)
+        private Boolean ReverseValue(Boolean value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToBoolean(bytes, 0);
         }
 
-        private double ReverseValue(double value)
+        private Double ReverseValue(Double value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToDouble(bytes, 0);
         }
 
-        private short ReverseValue(short value)
+        private Int16 ReverseValue(Int16 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToInt16(bytes, 0);
         }
 
-        private int ReverseValue(int value)
+        private Int32 ReverseValue(Int32 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToInt32(bytes, 0);
         }
 
-        private long ReverseValue(long value)
+        private Int64 ReverseValue(Int64 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToInt64(bytes, 0);
         }
 
-        private ushort ReverseValue(ushort value)
+        private UInt16 ReverseValue(UInt16 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToUInt16(bytes, 0);
         }
 
-        private uint ReverseValue(uint value)
+        private UInt32 ReverseValue(UInt32 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToUInt32(bytes, 0);
         }
 
-        private ulong ReverseValue(ulong value)
+        private UInt64 ReverseValue(UInt64 value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            Byte[] bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
             return BitConverter.ToUInt64(bytes, 0);
         }

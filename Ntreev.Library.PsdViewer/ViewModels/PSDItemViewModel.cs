@@ -45,7 +45,7 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             }
         }
 
-        public override string DisplayName
+        public override String DisplayName
         {
             get { return "Document"; }
         }
@@ -55,8 +55,8 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             get { return this.document; }
         }
 
-        public object Value => null;
+        public Object Value => null;
 
-        public string Type => null;
+        public String Type => null;
     }
 }

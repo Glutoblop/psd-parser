@@ -31,12 +31,12 @@ namespace Ntreev.Library.Psd.Readers
 
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.Length - reader.Position;
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out Channel[] value)
+        protected override void ReadValue(PsdReader reader, Object userData, out Channel[] value)
         {
             //using (MemoryStream stream = new MemoryStream(reader.ReadBytes((int)this.Length)))
             //using (PsdReader r = new PsdReader(stream, reader.Resolver, reader.Uri))
@@ -49,39 +49,39 @@ namespace Ntreev.Library.Psd.Readers
 
         private static Channel[] ReadValue(PsdReader reader, PsdDocument document)
         {
-            int channelCount = document.FileHeaderSection.NumberOfChannels;
-            int width = document.Width;
-            int height = document.Height;
-            int depth = document.FileHeaderSection.Depth;
+            Int32 channelCount = document.FileHeaderSection.NumberOfChannels;
+            Int32 width = document.Width;
+            Int32 height = document.Height;
+            Int32 depth = document.FileHeaderSection.Depth;
 
             CompressionType compressionType = (CompressionType)reader.ReadInt16();
 
             ChannelType[] types = new ChannelType[] { ChannelType.Red, ChannelType.Green, ChannelType.Blue, ChannelType.Alpha };
             Channel[] channels = new Channel[channelCount];
 
-            for (int i = 0; i < channels.Length; i++)
+            for (Int32 i = 0; i < channels.Length; i++)
             {
                 ChannelType type = i < types.Length ? types[i] : ChannelType.Mask;
                 channels[i] = new Channel(type, width, height, 0);
                 channels[i].ReadHeader(reader, compressionType);
             }
 
-            for (int i = 0; i < channels.Length; i++)
+            for (Int32 i = 0; i < channels.Length; i++)
             {
                 channels[i].Read(reader, depth, compressionType);
             }
 
             if (channels.Length == 4)
             {
-                for (int i = 0; i < channels[3].Data.Length; i++)
+                for (Int32 i = 0; i < channels[3].Data.Length; i++)
                 {
-                    float a = channels[3].Data[i] / 255.0f;
+                    Single a = channels[3].Data[i] / 255.0f;
 
-                    for (int j = 0; j < 3; j++)
+                    for (Int32 j = 0; j < 3; j++)
                     {
-                        float r = channels[j].Data[i] / 255.0f;
-                        float r1 = (((a + r) - 1f) * 1f) / a;
-                        channels[j].Data[i] = (byte)(r1 * 255.0f);
+                        Single r = channels[j].Data[i] / 255.0f;
+                        Single r1 = (((a + r) - 1f) * 1f) / a;
+                        channels[j].Data[i] = (Byte)(r1 * 255.0f);
                     }
                 }
             }

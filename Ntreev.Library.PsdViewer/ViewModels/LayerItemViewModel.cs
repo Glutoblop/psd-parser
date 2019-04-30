@@ -56,7 +56,7 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             this.previewCommand = new DelegateCommand((p) => this.Preview(), (p) => this.CanPreview);
         }
 
-        public void Save(string filename)
+        public void Save(String filename)
         {
             var bitmap = this.layer.GetBitmap();
             using (var stream = new FileStream(filename, FileMode.Create))
@@ -86,12 +86,12 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             dialog.ShowDialog();
         }
 
-        public bool CanPreview
+        public Boolean CanPreview
         {
             get { return true; }
         }
 
-        public bool HasLinkedLayer
+        public Boolean HasLinkedLayer
         {
             get
             {
@@ -109,13 +109,13 @@ namespace Ntreev.Library.PsdViewer.ViewModels
 
         public override ICommand DefaultCommand => this.previewCommand;
 
-        public override string DisplayName
+        public override String DisplayName
         {
             get { return this.layer.Name; }
         }
 
-        public object Value => null;
+        public Object Value => null;
 
-        public string Type => null;
+        public String Type => null;
     }
 }

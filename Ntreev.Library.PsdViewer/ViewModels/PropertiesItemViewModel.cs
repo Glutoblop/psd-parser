@@ -28,27 +28,27 @@ namespace Ntreev.Library.PsdViewer.ViewModels
 {
     class PropertiesItemViewModel : TreeViewItemViewModel
     {
-        private readonly string name;
-        private object value;
-        private string type;
+        private readonly String name;
+        private Object value;
+        private String type;
 
-        public PropertiesItemViewModel(string name, IProperties properties, TreeViewItemViewModel parent)
+        public PropertiesItemViewModel(String name, IProperties properties, TreeViewItemViewModel parent)
         {
             this.name = name;
             foreach (var item in properties)
             {
-                object value = item.Value;
+                Object value = item.Value;
 
                 if (value is IProperties == true)
                 {
                     this.Items.Add(new PropertiesItemViewModel(item.Key, value as IProperties, this));
                 }
-                else if (value is IEnumerable == true && value is string == false)
+                else if (value is IEnumerable == true && value is String == false)
                 {
-                    int index = 0;
+                    Int32 index = 0;
                     foreach (var i in value as IEnumerable)
                     {
-                        string n = string.Format("{0}[{1}]", item.Key, index);
+                        String n = String.Format("{0}[{1}]", item.Key, index);
                         if (i is IProperties == true)
                             this.Items.Add(new PropertiesItemViewModel(n, i as IProperties, this));
                         else
@@ -63,14 +63,14 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             }
         }
 
-        public PropertiesItemViewModel(string name, object value, TreeViewItemViewModel parent)
+        public PropertiesItemViewModel(String name, Object value, TreeViewItemViewModel parent)
         {
             this.name = name;
             this.value = value;
             this.type = value.GetType().Name;
         }
 
-        public override string DisplayName
+        public override String DisplayName
         {
             get
             {
@@ -78,12 +78,12 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             }
         }
 
-        public object Value
+        public Object Value
         {
             get { return this.value; }
         }
 
-        public string Type
+        public String Type
         {
             get { return this.type; }
         }

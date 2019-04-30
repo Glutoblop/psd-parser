@@ -25,12 +25,12 @@ namespace Ntreev.Library.Psd
 {
     static class PsdUtility
     {
-        public static byte[] DecodeRLE(byte[] source)
+        public static Byte[] DecodeRLE(Byte[] source)
         {
-            List<byte> dest = new List<byte>();
-            byte runLength;
+            List<Byte> dest = new List<Byte>();
+            Byte runLength;
 
-            for (int i = 1; i < source.Length; i += 2)
+            for (Int32 i = 1; i < source.Length; i += 2)
             {
                 runLength = source[i - 1];
 
@@ -43,14 +43,14 @@ namespace Ntreev.Library.Psd
             return dest.ToArray();
         }
 
-        public static void DecodeRLE(byte[] src, byte[] dst, int packedLength, int unpackedLength)
+        public static void DecodeRLE(Byte[] src, Byte[] dst, Int32 packedLength, Int32 unpackedLength)
         {
-            int index = 0;
-            int num2 = 0;
-            int num3 = 0;
-            byte num4 = 0;
-            int num5 = unpackedLength;
-            int num6 = packedLength;
+            Int32 index = 0;
+            Int32 num2 = 0;
+            Int32 num3 = 0;
+            Byte num4 = 0;
+            Int32 num5 = unpackedLength;
+            Int32 num6 = packedLength;
             while ((num5 > 0) && (num6 > 0))
             {
                 num3 = src[index++];
@@ -70,7 +70,7 @@ namespace Ntreev.Library.Psd
                         }
                         if (num3 > num5)
                         {
-                            throw new Exception(string.Format("Overrun in packbits replicate of {0} chars", num3 - num5));
+                            throw new Exception(String.Format("Overrun in packbits replicate of {0} chars", num3 - num5));
                         }
                         num4 = src[index];
                         while (num3 > 0)
@@ -117,7 +117,7 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public static BlendMode ToBlendMode(string text)
+        public static BlendMode ToBlendMode(String text)
         {
             switch (text.Trim())
             {
@@ -181,7 +181,7 @@ namespace Ntreev.Library.Psd
             return BlendMode.Normal;
         }
 
-        public static UnitType ToUnitType(string text)
+        public static UnitType ToUnitType(String text)
         {
             switch (text)
             {
@@ -206,7 +206,7 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public static int DepthToPitch(int depth, int width)
+        public static Int32 DepthToPitch(Int32 depth, Int32 width)
         {
             switch (depth)
             {

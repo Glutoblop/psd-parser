@@ -24,18 +24,18 @@ namespace Ntreev.Library.Psd
 {
     public static class Extensions
     {
-        public static byte[] MergeChannels(this IImageSource imageSource)
+        public static Byte[] MergeChannels(this IImageSource imageSource)
         {
             IChannel[] channels = imageSource.Channels;
 
-            int length = channels.Length;
-            int num2 = channels[0].Data.Length;
+            Int32 length = channels.Length;
+            Int32 num2 = channels[0].Data.Length;
 
-            byte[] buffer = new byte[(imageSource.Width * imageSource.Height) * length];
-            int num3 = 0;
-            for (int i = 0; i < num2; i++)
+            Byte[] buffer = new Byte[(imageSource.Width * imageSource.Height) * length];
+            Int32 num3 = 0;
+            for (Int32 i = 0; i < num2; i++)
             {
-                for (int j = channels.Length - 1; j >= 0; j--)
+                for (Int32 j = channels.Length - 1; j >= 0; j--)
                 {
                     buffer[num3++] = channels[j].Data[i];
                 }
@@ -48,7 +48,7 @@ namespace Ntreev.Library.Psd
             return Descendants(layer, item => true);
         }
 
-        public static IEnumerable<IPsdLayer> Descendants(this IPsdLayer layer, Func<IPsdLayer, bool> filter)
+        public static IEnumerable<IPsdLayer> Descendants(this IPsdLayer layer, Func<IPsdLayer, Boolean> filter)
         {
             foreach (var item in layer.Childs)
             {

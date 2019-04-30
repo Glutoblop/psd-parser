@@ -25,7 +25,7 @@ namespace Ntreev.Library.Psd
 {
     class DescriptorStructure : Properties
     {
-        private readonly int version;
+        private readonly Int32 version;
 
         public DescriptorStructure(PsdReader reader)
             : this(reader, true)
@@ -33,7 +33,7 @@ namespace Ntreev.Library.Psd
 
         }
 
-        public DescriptorStructure(PsdReader reader, bool hasVersion)
+        public DescriptorStructure(PsdReader reader, Boolean hasVersion)
         {
             if (hasVersion == true)
             {
@@ -43,18 +43,18 @@ namespace Ntreev.Library.Psd
             this.Add("Name", reader.ReadString());
             this.Add("ClassID", reader.ReadKey());
 
-            int count = reader.ReadInt32();
-            for (int i = 0; i < count; i++)
+            Int32 count = reader.ReadInt32();
+            for (Int32 i = 0; i < count; i++)
             {
-                string key = reader.ReadKey();
-                string osType = reader.ReadType();
+                String key = reader.ReadKey();
+                String osType = reader.ReadType();
                 if (key == "EngineData")
                 {
                     this.Add(key.Trim(), new StructureEngineData(reader));
                 }
                 else
                 {
-                    object value = StructureReader.Read(osType, reader);
+                    Object value = StructureReader.Read(osType, reader);
                     this.Add(key.Trim(), value);
                 }
             }

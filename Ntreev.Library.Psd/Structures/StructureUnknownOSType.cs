@@ -24,7 +24,7 @@ namespace Ntreev.Library.Psd.Structures
 {
     class StructureUnknownOSType : Properties
     {
-        public StructureUnknownOSType(string value)
+        public StructureUnknownOSType(String value)
         {
             this.Add("Value", value);
         }

@@ -26,12 +26,12 @@ namespace Ntreev.Library.Psd
 {
     class LinkedLayer : ILinkedLayer
     {
-        private readonly string name;
+        private readonly String name;
         private readonly Guid id;
         private readonly LinkedDocumentReader documentReader;
         private readonly LinkedDocumnetFileHeaderReader fileHeaderReader;
 
-        public LinkedLayer(string name, Guid id, LinkedDocumentReader documentReader, LinkedDocumnetFileHeaderReader fileHeaderReader)
+        public LinkedLayer(String name, Guid id, LinkedDocumentReader documentReader, LinkedDocumnetFileHeaderReader fileHeaderReader)
         {
             this.name = name;
             this.id = id;
@@ -54,7 +54,7 @@ namespace Ntreev.Library.Psd
             get { return null; }
         }
 
-        public bool HasDocument
+        public Boolean HasDocument
         {
             get { return this.documentReader != null; }
         }
@@ -64,17 +64,17 @@ namespace Ntreev.Library.Psd
             get { return this.id; }
         }
 
-        public string Name
+        public String Name
         {
             get { return this.name; }
         }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.fileHeaderReader.Value.Width; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.fileHeaderReader.Value.Height; }
         }

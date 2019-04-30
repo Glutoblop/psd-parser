@@ -25,7 +25,7 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("SoLE")]
     class Reader_SoLE : Reader_SoLd
     {
-        public Reader_SoLE(PsdReader reader, long length)
+        public Reader_SoLE(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 

@@ -39,11 +39,11 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             this.Items.Add(new PSDItemViewModel(linkedLayer.Document));
         }
 
-        public override string DisplayName
+        public override String DisplayName
         {
             get
             {
-                return string.Format("LinkedLayer({0})", this.linkedLayer.Name);
+                return String.Format("LinkedLayer({0})", this.linkedLayer.Name);
             }
         }
 
@@ -52,8 +52,8 @@ namespace Ntreev.Library.PsdViewer.ViewModels
             get { return this.linkedLayer; }
         }
 
-        public object Value => null;
+        public Object Value => null;
 
-        public string Type => null;
+        public String Type => null;
     }
 }

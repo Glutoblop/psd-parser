@@ -36,7 +36,7 @@ namespace Ntreev.Library.Psd.Readers
             return instance.Value;
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out FileHeaderSection value)
+        protected override void ReadValue(PsdReader reader, Object userData, out FileHeaderSection value)
         {
             value = new FileHeaderSection();
            

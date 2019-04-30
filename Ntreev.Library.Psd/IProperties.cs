@@ -21,15 +21,15 @@ using System.Text;
 
 namespace Ntreev.Library.Psd
 {
-    public interface IProperties : IEnumerable<KeyValuePair<string, object>>
+    public interface IProperties : IEnumerable<KeyValuePair<String, Object>>
     {
-        bool Contains(string property);
+        Boolean Contains(String property);
 
-        object this[string property]
+        Object this[String property]
         {
             get;
         }
 
-        int Count { get; }
+        Int32 Count { get; }
     }
 }

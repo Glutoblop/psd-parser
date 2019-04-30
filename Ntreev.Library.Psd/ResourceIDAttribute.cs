@@ -25,24 +25,24 @@ namespace Ntreev.Library.Psd
     [AttributeUsage(AttributeTargets.Class)]
     class ResourceIDAttribute : Attribute
     {
-        private readonly string resourceID;
-        private string displayName;
+        private readonly String resourceID;
+        private String displayName;
 
-        public ResourceIDAttribute(string resourceID)
+        public ResourceIDAttribute(String resourceID)
         {
             this.resourceID = resourceID;
         }
 
-        public string ID
+        public String ID
         {
             get { return this.resourceID; }
         }
 
-        public string DisplayName
+        public String DisplayName
         {
             get
             {
-                if (string.IsNullOrEmpty(this.displayName) == true)
+                if (String.IsNullOrEmpty(this.displayName) == true)
                     return this.resourceID;
                 return this.displayName;
             }

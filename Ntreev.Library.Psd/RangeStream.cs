@@ -26,27 +26,27 @@ namespace Ntreev.Library.Psd
     class RangeStream : Stream
     {
         private readonly Stream stream;
-        private readonly long position;
-        private readonly long length;
+        private readonly Int64 position;
+        private readonly Int64 length;
 
-        public RangeStream(Stream stream, long position, long length)
+        public RangeStream(Stream stream, Int64 position, Int64 length)
         {
             this.stream = stream;
             this.position = position;
             this.length = length;
         }
 
-        public override bool CanRead
+        public override Boolean CanRead
         {
             get { return true; }
         }
 
-        public override bool CanSeek
+        public override Boolean CanSeek
         {
             get { return true; }
         }
 
-        public override bool CanWrite
+        public override Boolean CanWrite
         {
             get { return false; }
         }
@@ -56,12 +56,12 @@ namespace Ntreev.Library.Psd
             //this.stream.Flush();
         }
 
-        public override long Length
+        public override Int64 Length
         {
             get { return this.length; }
         }
 
-        public override long Position
+        public override Int64 Position
         {
             get
             {
@@ -73,12 +73,12 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public override int Read(byte[] buffer, int offset, int count)
+        public override Int32 Read(Byte[] buffer, Int32 offset, Int32 count)
         {
             return this.stream.Read(buffer, offset, count);
         }
 
-        public override long Seek(long offset, SeekOrigin origin)
+        public override Int64 Seek(Int64 offset, SeekOrigin origin)
         {
             if (origin == SeekOrigin.Current)
                 return this.stream.Seek(offset, origin) - this.position;
@@ -86,12 +86,12 @@ namespace Ntreev.Library.Psd
             return this.stream.Seek(this.position + offset, origin) - this.position;
         }
 
-        public override void SetLength(long value)
+        public override void SetLength(Int64 value)
         {
             throw new NotImplementedException();
         }
 
-        public override void Write(byte[] buffer, int offset, int count)
+        public override void Write(Byte[] buffer, Int32 offset, Int32 count)
         {
             throw new NotImplementedException();
         }

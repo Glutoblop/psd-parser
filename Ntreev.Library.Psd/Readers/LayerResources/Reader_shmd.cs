@@ -25,24 +25,24 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("shmd")]
     class Reader_shmd : ResourceReaderBase
     {
-        public Reader_shmd(PsdReader reader, long length)
+        public Reader_shmd(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
 
-            int count = reader.ReadInt32();
+            Int32 count = reader.ReadInt32();
 
             List<DescriptorStructure> dss = new List<DescriptorStructure>();
 
-            for (int i = 0; i < count; i++)
+            for (Int32 i = 0; i < count; i++)
             {
-                string s = reader.ReadAscii(4);
-                string k = reader.ReadAscii(4);
+                String s = reader.ReadAscii(4);
+                String k = reader.ReadAscii(4);
                 var c = reader.ReadByte();
                 var p = reader.ReadBytes(3);
                 var l = reader.ReadInt32();

@@ -26,12 +26,12 @@ namespace Ntreev.Library.Psd.Structures
     {
         public BaseStructure(PsdReader reader)
         {
-            List<object> items = new List<object>();
-            int count = reader.ReadInt32();
-            for (int i = 0; i < count; i++)
+            List<Object> items = new List<Object>();
+            Int32 count = reader.ReadInt32();
+            for (Int32 i = 0; i < count; i++)
             {
-                string type = reader.ReadType();
-                object value = StructureReader.Read(type, reader);
+                String type = reader.ReadType();
+                Object value = StructureReader.Read(type, reader);
                 items.Add(value);
             }
             this.Add("Items", items.ToArray());

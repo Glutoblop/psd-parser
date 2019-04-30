@@ -30,8 +30,8 @@ namespace Ntreev.Library.Psd
         private readonly PsdResolver resolver;
         private readonly Uri absoluteUri;
         private PsdDocument document;
-        private readonly int width;
-        private readonly int height;
+        private readonly Int32 width;
+        private readonly Int32 height;
         
         public EmbeddedLayer(Guid id, PsdResolver resolver, Uri absoluteUri)
         {
@@ -64,7 +64,7 @@ namespace Ntreev.Library.Psd
             get { return this.absoluteUri; }
         }
 
-        public bool HasDocument
+        public Boolean HasDocument
         {
             get { return File.Exists(this.absoluteUri.LocalPath); }
         }
@@ -74,17 +74,17 @@ namespace Ntreev.Library.Psd
             get { return this.id; }
         }
 
-        public string Name
+        public String Name
         {
             get { return this.absoluteUri.LocalPath; }
         }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.width; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.height; }
         }

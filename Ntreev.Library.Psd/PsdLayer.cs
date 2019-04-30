@@ -26,7 +26,7 @@ namespace Ntreev.Library.Psd
         private readonly PsdDocument document;
         private readonly LayerRecords records;
 
-        private int left, top, right, bottom;
+        private Int32 left, top, right, bottom;
 
         private PsdLayer[] childs;
         private PsdLayer parent;
@@ -48,7 +48,7 @@ namespace Ntreev.Library.Psd
             this.bottom = this.records.Bottom;
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             return this.Name;
         }
@@ -63,57 +63,57 @@ namespace Ntreev.Library.Psd
             get { return this.records.SectionType; }
         }
 
-        public string Name
+        public String Name
         {
             get { return this.records.Name; }
         }
 
-        public bool IsVisible
+        public Boolean IsVisible
         {
             get { return (this.records.Flags & LayerFlags.Visible) != LayerFlags.Visible; }
         }
 
-        public float Opacity
+        public Single Opacity
         {
-            get { return (((float)this.records.Opacity) / 255f); }
+            get { return (((Single)this.records.Opacity) / 255f); }
         }
 
-        public int Left
+        public Int32 Left
         {
             get { return this.left; }
         }
 
-        public int Top
+        public Int32 Top
         {
             get { return this.top; }
         }
 
-        public int Right
+        public Int32 Right
         {
             get { return this.right; }
         }
 
-        public int Bottom
+        public Int32 Bottom
         {
             get { return this.bottom; }
         }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.right - this.left; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.bottom - this.top; }
         }
 
-        public int Depth
+        public Int32 Depth
         {
             get { return this.document.FileHeaderSection.Depth; }
         }
 
-        public bool IsClipping
+        public Boolean IsClipping
         {
             get { return this.records.Clipping; }
         }
@@ -172,7 +172,7 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public bool HasImage
+        public Boolean HasImage
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public bool HasMask
+        public Boolean HasMask
         {
             get { return this.records.Mask != null; }
         }
@@ -200,12 +200,12 @@ namespace Ntreev.Library.Psd
             if (sectionType != SectionType.Opend && sectionType != SectionType.Closed)
                 return;
 
-            int left = int.MaxValue;
-            int top = int.MaxValue;
-            int right = int.MinValue;
-            int bottom = int.MinValue;
+            Int32 left = Int32.MaxValue;
+            Int32 top = Int32.MaxValue;
+            Int32 right = Int32.MinValue;
+            Int32 bottom = Int32.MinValue;
 
-            bool isSet = false;
+            Boolean isSet = false;
 
             foreach (var item in this.Descendants())
             {
@@ -215,14 +215,14 @@ namespace Ntreev.Library.Psd
                 // 일반 레이어인데 비어 있을때
                 if (item.Resources.Contains("PlLd.Transformation"))
                 {
-                    double[] transforms = (double[])item.Resources["PlLd.Transformation"];
-                    double[] xx = new double[] { transforms[0], transforms[2], transforms[4], transforms[6], };
-                    double[] yy = new double[] { transforms[1], transforms[3], transforms[5], transforms[7], };
+                    Double[] transforms = (Double[])item.Resources["PlLd.Transformation"];
+                    Double[] xx = new Double[] { transforms[0], transforms[2], transforms[4], transforms[6], };
+                    Double[] yy = new Double[] { transforms[1], transforms[3], transforms[5], transforms[7], };
 
-                    int l = (int)Math.Ceiling(xx.Min());
-                    int r = (int)Math.Ceiling(xx.Max());
-                    int t = (int)Math.Ceiling(yy.Min());
-                    int b = (int)Math.Ceiling(yy.Max());
+                    Int32 l = (Int32)Math.Ceiling(xx.Min());
+                    Int32 r = (Int32)Math.Ceiling(xx.Max());
+                    Int32 t = (Int32)Math.Ceiling(yy.Min());
+                    Int32 b = (Int32)Math.Ceiling(yy.Max());
                     left = Math.Min(l, left);
                     top = Math.Min(t, top);
                     right = Math.Max(r, right);

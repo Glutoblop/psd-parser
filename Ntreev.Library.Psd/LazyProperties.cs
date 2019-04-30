@@ -24,36 +24,36 @@ namespace Ntreev.Library.Psd
 {
     abstract class LazyProperties : LazyValueReader<IProperties>, IProperties
     {
-        protected LazyProperties(PsdReader reader, object userData)
+        protected LazyProperties(PsdReader reader, Object userData)
             : base(reader, userData)
         {
 
         }
 
-        protected LazyProperties(PsdReader reader, long length, object userData)
+        protected LazyProperties(PsdReader reader, Int64 length, Object userData)
             : base(reader, length, userData)
         {
 
         }
 
-        public bool Contains(string property)
+        public Boolean Contains(String property)
         {
             return this.Value.Contains(property);
         }
 
-        public object this[string property]
+        public Object this[String property]
         {
             get { return this.Value[property]; }
         }
 
-        public int Count
+        public Int32 Count
         {
             get { return this.Value.Count; }
         }
 
         #region IProperties
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<String, Object>> IEnumerable<KeyValuePair<String, Object>>.GetEnumerator()
         {
             return (this.Value as IProperties).GetEnumerator();
         }

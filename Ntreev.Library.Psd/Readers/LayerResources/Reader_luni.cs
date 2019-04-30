@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("luni")]
     class Reader_luni : ResourceReaderBase
     {
-        public Reader_luni(PsdReader reader, long length)
+        public Reader_luni(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
             props["Name"] = reader.ReadString();

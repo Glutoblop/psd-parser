@@ -24,13 +24,13 @@ namespace Ntreev.Library.Psd.Readers.ImageResources
     [ResourceID("1005", DisplayName = "Resolution")]
     class Reader_ResolutionInfo : ResourceReaderBase
     {
-        public Reader_ResolutionInfo(PsdReader reader, long length)
+        public Reader_ResolutionInfo(PsdReader reader, Int64 length)
             : base(reader, length)
         {
             
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties(6);
 

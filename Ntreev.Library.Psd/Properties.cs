@@ -24,44 +24,44 @@ namespace Ntreev.Library.Psd
 {
     class Properties : IProperties
     {
-        private readonly Dictionary<string, object> props;
+        private readonly Dictionary<String, Object> props;
 
         public Properties()
         {
-            this.props = new Dictionary<string, object>();
+            this.props = new Dictionary<String, Object>();
         }
 
-        public Properties(int capacity)
+        public Properties(Int32 capacity)
         {
-            this.props = new Dictionary<string, object>(capacity);
+            this.props = new Dictionary<String, Object>(capacity);
         }
 
-        public void Add(string key, object value)
+        public void Add(String key, Object value)
         {
             this.props.Add(key, value);
         }
 
-        public bool Contains(string property)
+        public Boolean Contains(String property)
         {
-            string[] ss = property.Split(new char[] { '.', '[', ']', }, StringSplitOptions.RemoveEmptyEntries);
+            String[] ss = property.Split(new Char[] { '.', '[', ']', }, StringSplitOptions.RemoveEmptyEntries);
 
-            object value = this.props;
+            Object value = this.props;
 
             foreach (var item in ss)
             {
                 if (value is ArrayList == true)
                 {
                     ArrayList arrayList = value as ArrayList;
-                    int index;
-                    if (int.TryParse(item, out index) == false)
+                    Int32 index;
+                    if (Int32.TryParse(item, out index) == false)
                         return false;
                     if (index >= arrayList.Count)
                         return false;
                     value = arrayList[index];
                 }
-                else if (value is IDictionary<string, object> == true)
+                else if (value is IDictionary<String, Object> == true)
                 {
-                    IDictionary<string, object> props = value as IDictionary<string, object>;
+                    IDictionary<String, Object> props = value as IDictionary<String, Object>;
                     if (props.ContainsKey(item) == false)
                     {
                         return false;
@@ -74,22 +74,22 @@ namespace Ntreev.Library.Psd
             return true; 
         }
 
-        private object GetProperty(string property)
+        private Object GetProperty(String property)
         {
-            string[] ss = property.Split(new char[] { '.', '[', ']', }, StringSplitOptions.RemoveEmptyEntries);
+            String[] ss = property.Split(new Char[] { '.', '[', ']', }, StringSplitOptions.RemoveEmptyEntries);
 
-            object value = this.props;
+            Object value = this.props;
 
             foreach (var item in ss)
             {
                 if (value is ArrayList == true)
                 {
                     ArrayList arrayList = value as ArrayList;
-                    value = arrayList[int.Parse(item)];
+                    value = arrayList[Int32.Parse(item)];
                 }
-                else if (value is IDictionary<string, object> == true)
+                else if (value is IDictionary<String, Object> == true)
                 {
-                    IDictionary<string, object> props = value as IDictionary<string, object>;
+                    IDictionary<String, Object> props = value as IDictionary<String, Object>;
                     value = props[item];
                 }
                 else if (value is IProperties == true)
@@ -101,12 +101,12 @@ namespace Ntreev.Library.Psd
             return value;
         }
 
-        public int Count
+        public Int32 Count
         {
             get { return this.props.Count; }
         }
 
-        public object this[string property]
+        public Object this[String property]
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Ntreev.Library.Psd
 
         #region IProperties
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<String, Object>> IEnumerable<KeyValuePair<String, Object>>.GetEnumerator()
         {
             return this.props.GetEnumerator();
         }

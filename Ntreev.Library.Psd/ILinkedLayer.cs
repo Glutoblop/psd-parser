@@ -34,7 +34,7 @@ namespace Ntreev.Library.Psd
             get;
         }
 
-        bool HasDocument
+        Boolean HasDocument
         {
             get;
         }
@@ -44,17 +44,17 @@ namespace Ntreev.Library.Psd
             get;
         }
 
-        string Name
+        String Name
         {
             get;
         }
 
-        int Width
+        Int32 Width
         {
             get;
         }
 
-        int Height
+        Int32 Height
         {
             get;
         }

@@ -41,8 +41,8 @@ namespace Ntreev.Library.PsdViewer
 
             if (e.Data.GetDataPresent(DataFormats.FileDrop) == true)
             {
-                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
-                if (files.Length == 1 && files.First() is string path && Path.GetExtension(path) == ".psd")
+                var files = e.Data.GetData(DataFormats.FileDrop) as String[];
+                if (files.Length == 1 && files.First() is String path && Path.GetExtension(path) == ".psd")
                 {
                     e.Effects = DragDropEffects.Copy;
                     e.Handled = true;
@@ -58,7 +58,7 @@ namespace Ntreev.Library.PsdViewer
             base.OnDrop(e);
             if (e.Data.GetDataPresent(DataFormats.FileDrop) == true)
             {
-                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                var files = e.Data.GetData(DataFormats.FileDrop) as String[];
                 var filename = files.First();
                 var command = DragDropUtility.GetDropCommand(this);
                 if (command != null && command.CanExecute(filename) == true)

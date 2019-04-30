@@ -47,12 +47,12 @@ namespace Ntreev.Library.PsdViewer.Controls
             return new TreeListViewItem();
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override Boolean IsItemItsOwnContainerOverride(Object item)
         {
             return item is TreeListViewItem;
         }
 
-        private void DockPanel_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void DockPanel_PreviewMouseLeftButtonDown(Object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2 && sender is FrameworkElement fe && fe.DataContext is ICommand command)
             {
@@ -70,7 +70,7 @@ namespace Ntreev.Library.PsdViewer.Controls
         /// <summary>
         /// Item's hierarchy in the tree
         /// </summary>
-        public int Level
+        public Int32 Level
         {
             get
             {
@@ -92,11 +92,11 @@ namespace Ntreev.Library.PsdViewer.Controls
             return new TreeListViewItem();
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override Boolean IsItemItsOwnContainerOverride(Object item)
         {
             return item is TreeListViewItem;
         }
 
-        private int _level = -1;
+        private Int32 _level = -1;
     }
 }

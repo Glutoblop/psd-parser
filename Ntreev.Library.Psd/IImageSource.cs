@@ -24,18 +24,18 @@ namespace Ntreev.Library.Psd
 {
     public interface IImageSource
     {
-        int Width { get; }
+        Int32 Width { get; }
 
-        int Height { get; }
+        Int32 Height { get; }
 
-        int Depth { get; }
+        Int32 Depth { get; }
 
         IChannel[] Channels { get; }
 
-        float Opacity { get; }
+        Single Opacity { get; }
 
-        bool HasImage { get; }
+        Boolean HasImage { get; }
 
-        bool HasMask { get; }
+        Boolean HasMask { get; }
     }
 }

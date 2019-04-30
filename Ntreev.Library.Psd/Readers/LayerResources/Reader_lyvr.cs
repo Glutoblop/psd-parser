@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerResources
     [ResourceID("lyvr")]
     class Reader_lyvr : ResourceReaderBase
     {
-        public Reader_lyvr(PsdReader reader, long length)
+        public Reader_lyvr(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
             props["Version"] = reader.ReadInt32();

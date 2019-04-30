@@ -24,24 +24,24 @@ namespace Ntreev.Library.Psd
 {
     public class LayerMask
     {
-        public int Left { get; set; }
+        public Int32 Left { get; set; }
 
-        public int Top { get; set; }
+        public Int32 Top { get; set; }
 
-        public int Right { get; set; }
+        public Int32 Right { get; set; }
 
-        public int Bottom { get; set; }
+        public Int32 Bottom { get; set; }
 
-        public byte Color { get; set; }
+        public Byte Color { get; set; }
 
-        public byte Flag { get; set; }
+        public Byte Flag { get; set; }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.Right - this.Left; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.Bottom - this.Top; }
         }

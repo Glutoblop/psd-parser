@@ -36,7 +36,7 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             return instance.Value;
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out LayerRecords value)
+        protected override void ReadValue(PsdReader reader, Object userData, out LayerRecords value)
         {
             LayerRecords records = new LayerRecords();
 
@@ -46,11 +46,11 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             records.Right = reader.ReadInt32();
             records.ValidateSize();
 
-            int channelCount = reader.ReadUInt16();
+            Int32 channelCount = reader.ReadUInt16();
 
             records.ChannelCount = channelCount;
 
-            for (int i = 0; i < channelCount; i++)
+            for (Int32 i = 0; i < channelCount; i++)
             {
                 records.Channels[i].Type = reader.ReadChannelType();
                 records.Channels[i].Size = reader.ReadLength();

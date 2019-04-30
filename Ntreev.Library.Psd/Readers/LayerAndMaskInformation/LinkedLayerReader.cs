@@ -30,29 +30,29 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return (reader.ReadInt64() + 3) & (~3);
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out LinkedLayer value)
+        protected override void ReadValue(PsdReader reader, Object userData, out LinkedLayer value)
         {
             reader.ValidateSignature("liFD");
-            int version = reader.ReadInt32();
+            Int32 version = reader.ReadInt32();
 
             Guid id = new Guid(reader.ReadPascalString(1));
-            string name = reader.ReadString();
-            string type = reader.ReadType();
-            string creator = reader.ReadType();
-            long length = reader.ReadInt64();
+            String name = reader.ReadString();
+            String type = reader.ReadType();
+            String creator = reader.ReadType();
+            Int64 length = reader.ReadInt64();
             IProperties properties = reader.ReadBoolean() == true ? new DescriptorStructure(reader) : null;
 
-            bool isDocument = this.IsDocument(reader);
+            Boolean isDocument = this.IsDocument(reader);
             LinkedDocumentReader documentReader = null;
             LinkedDocumnetFileHeaderReader fileHeaderReader = null;
             if(length > 0 && isDocument == true)
             {
-                long position = reader.Position;
+                Int64 position = reader.Position;
                 documentReader = new LinkedDocumentReader(reader, length);
                 reader.Position = position;
                 fileHeaderReader = new LinkedDocumnetFileHeaderReader(reader, length);
@@ -61,9 +61,9 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             value = new LinkedLayer(name, id, documentReader, fileHeaderReader);
         }
 
-        private bool IsDocument(PsdReader reader)
+        private Boolean IsDocument(PsdReader reader)
         {
-            long position = reader.Position;
+            Int64 position = reader.Position;
             try
             {
                 return reader.ReadType() == "8BPS";

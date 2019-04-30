@@ -51,7 +51,7 @@ namespace Ntreev.Library.Psd
                 if (this.linkedLayers == null)
                 {
                     List<ILinkedLayer> list = new List<ILinkedLayer>();
-                    string[] ids = { "lnk2", "lnk3", "lnkD", "lnkE", };
+                    String[] ids = { "lnk2", "lnk3", "lnkD", "lnkE", };
 
                     foreach (var item in ids)
                     {

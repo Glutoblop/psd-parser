@@ -33,12 +33,12 @@ namespace Ntreev.Library.Psd.Readers
 
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadInt32();
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
 
@@ -46,13 +46,13 @@ namespace Ntreev.Library.Psd.Readers
             {
                 reader.ValidateSignature();
 
-                string resourceID = reader.ReadInt16().ToString();
-                string name = reader.ReadPascalString(2);
-                long length = reader.ReadInt32();
+                String resourceID = reader.ReadInt16().ToString();
+                String name = reader.ReadPascalString(2);
+                Int64 length = reader.ReadInt32();
                 length += (length % 2);
 
                 ResourceReaderBase resourceReader = ReaderCollector.CreateReader(resourceID, reader, length);
-                string resourceName = ReaderCollector.GetDisplayName(resourceID);
+                String resourceName = ReaderCollector.GetDisplayName(resourceID);
 
                 props[resourceName] = resourceReader;
             }

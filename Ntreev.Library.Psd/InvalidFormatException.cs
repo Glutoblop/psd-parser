@@ -30,14 +30,14 @@ namespace Ntreev.Library.Psd
 
         }
 
-        public InvalidFormatException(string message)
+        public InvalidFormatException(String message)
             : base(message)
         {
 
         }
 
-        public InvalidFormatException(string format, params object[] args)
-            : base(string.Format(format, args))
+        public InvalidFormatException(String format, params Object[] args)
+            : base(String.Format(format, args))
         {
 
         }

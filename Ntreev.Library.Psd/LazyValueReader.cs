@@ -24,13 +24,13 @@ namespace Ntreev.Library.Psd
 {
     abstract class LazyValueReader<T> : ValueReader<T>
     {
-        protected LazyValueReader(PsdReader reader, object userData)
+        protected LazyValueReader(PsdReader reader, Object userData)
             : base(reader, true, userData)
         {
 
         }
 
-        protected LazyValueReader(PsdReader reader, long length, object userData)
+        protected LazyValueReader(PsdReader reader, Int64 length, Object userData)
             : base(reader, length, userData)
         {
             

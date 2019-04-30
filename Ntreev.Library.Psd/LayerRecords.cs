@@ -27,20 +27,20 @@ namespace Ntreev.Library.Psd
         private LayerMask layerMask;
         private LayerBlendingRanges blendingRanges;
         private IProperties resources;
-        private string name;
+        private String name;
         private SectionType sectionType;
         private Guid placedID;
-        private int version;
+        private Int32 version;
 
-        public void SetExtraRecords(LayerMask layerMask, LayerBlendingRanges blendingRanges, IProperties resources, string name)
+        public void SetExtraRecords(LayerMask layerMask, LayerBlendingRanges blendingRanges, IProperties resources, String name)
         {
             this.layerMask = layerMask;
             this.blendingRanges = blendingRanges;
             this.resources = resources;
             this.name = name;
 
-            this.resources.TryGetValue<string>(ref this.name, "luni.Name");
-            this.resources.TryGetValue<int>(ref this.version, "lyvr.Version");
+            this.resources.TryGetValue<String>(ref this.name, "luni.Name");
+            this.resources.TryGetValue<Int32>(ref this.version, "lyvr.Version");
             if (this.resources.Contains("lsct.SectionType") == true)
                 this.sectionType = (SectionType)this.resources.ToInt32("lsct.SectionType");
             if (this.resources.Contains("lsdk.SectionType") == true)
@@ -68,7 +68,7 @@ namespace Ntreev.Library.Psd
                         {
                             if (this.resources.Contains("iOpa") == true)
                             {
-                                byte opa = this.resources.ToByte("iOpa", "Opacity");
+                                Byte opa = this.resources.ToByte("iOpa", "Opacity");
                                 item.Opacity = opa / 255.0f;
                             }
                         }
@@ -79,34 +79,34 @@ namespace Ntreev.Library.Psd
 
         public void ValidateSize()
         {
-            int width = this.Right - Left;
-            int height = this.Bottom - this.Top;
+            Int32 width = this.Right - Left;
+            Int32 height = this.Bottom - this.Top;
 
             if ((width > 0x3000) || (height > 0x3000))
             {
-                throw new NotSupportedException(string.Format("Invalidated size ({0}, {1})", width, height));
+                throw new NotSupportedException(String.Format("Invalidated size ({0}, {1})", width, height));
             }
         }
 
-        public int Left { get; set; }
+        public Int32 Left { get; set; }
 
-        public int Top { get; set; }
+        public Int32 Top { get; set; }
 
-        public int Right { get; set; }
+        public Int32 Right { get; set; }
 
-        public int Bottom { get; set; }
+        public Int32 Bottom { get; set; }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.Right - this.Left; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.Bottom - this.Top; }
         }
 
-        public int ChannelCount
+        public Int32 ChannelCount
         {
             get
             {
@@ -118,11 +118,11 @@ namespace Ntreev.Library.Psd
             {
                 if (value > 0x38)
                 {
-                    throw new Exception(string.Format("Too many channels : {0}", value));
+                    throw new Exception(String.Format("Too many channels : {0}", value));
                 }
 
                 this.channels = new Channel[value];
-                for (int i = 0; i < value; i++)
+                for (Int32 i = 0; i < value; i++)
                 {
                     this.channels[i] = new Channel();
                 }
@@ -136,15 +136,15 @@ namespace Ntreev.Library.Psd
 
         public BlendMode BlendMode { get; set; }
 
-        public byte Opacity { get; set; }
+        public Byte Opacity { get; set; }
 
-        public bool Clipping { get; set; }
+        public Boolean Clipping { get; set; }
 
         public LayerFlags Flags { get; set; }
 
-        public int Filter { get; set; }
+        public Int32 Filter { get; set; }
 
-        public long ChannelSize
+        public Int64 ChannelSize
         {
             get { return this.channels.Select(item => item.Size).Aggregate((v, n) => v + n); }
         }
@@ -159,7 +159,7 @@ namespace Ntreev.Library.Psd
             get { return this.placedID; }
         }
 
-        public string Name
+        public String Name
         {
             get { return this.name; }
         }
@@ -169,7 +169,7 @@ namespace Ntreev.Library.Psd
             get { return this.layerMask; }
         }
 
-        public object BlendingRanges
+        public Object BlendingRanges
         {
             get { return this.blendingRanges; }
         }
@@ -179,7 +179,7 @@ namespace Ntreev.Library.Psd
             get { return this.resources; }
         }
 
-        public int Version
+        public Int32 Version
         {
             get { return this.version; }
         }

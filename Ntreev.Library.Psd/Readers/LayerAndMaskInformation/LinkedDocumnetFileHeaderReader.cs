@@ -25,13 +25,13 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 {
     class LinkedDocumnetFileHeaderReader : LazyValueReader<FileHeaderSection>
     {
-        public LinkedDocumnetFileHeaderReader(PsdReader reader, long length)
+        public LinkedDocumnetFileHeaderReader(PsdReader reader, Int64 length)
             : base(reader, length, null)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out FileHeaderSection value)
+        protected override void ReadValue(PsdReader reader, Object userData, out FileHeaderSection value)
         {
             if (this.IsDocument(reader) == true)
             {
@@ -48,9 +48,9 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             }
         }
 
-        private bool IsDocument(PsdReader reader)
+        private Boolean IsDocument(PsdReader reader)
         {
-            long position = reader.Position;
+            Int64 position = reader.Position;
             try
             {
                 return reader.ReadType() == "8BPS";

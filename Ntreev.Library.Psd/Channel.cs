@@ -23,15 +23,15 @@ namespace Ntreev.Library.Psd
 {
     public class Channel : IChannel
     {
-        private byte[] data;
+        private Byte[] data;
         private ChannelType type;
-        private int height;
-        private int width;
-        private int[] rlePackLengths;
-        private float opacity = 1.0f;
-        private long size;
+        private Int32 height;
+        private Int32 width;
+        private Int32[] rlePackLengths;
+        private Single opacity = 1.0f;
+        private Int64 size;
 
-        public Channel(ChannelType type, int width, int height, long size)
+        public Channel(ChannelType type, Int32 width, Int32 height, Int64 size)
         {
             this.type = type;
             this.width = width;
@@ -44,7 +44,7 @@ namespace Ntreev.Library.Psd
             
         }
 
-        public byte[] Data
+        public Byte[] Data
         {
             get { return this.data; }
         }
@@ -60,24 +60,24 @@ namespace Ntreev.Library.Psd
             if (compressionType != CompressionType.RLE)
                 return;
 
-            this.rlePackLengths = new int[this.height];
+            this.rlePackLengths = new Int32[this.height];
             if (reader.Version == 1)
             {
-                for (int i = 0; i < this.height; i++)
+                for (Int32 i = 0; i < this.height; i++)
                 {
                     this.rlePackLengths[i] = reader.ReadInt16();
                 }
             }
             else
             {
-                for (int i = 0; i < this.height; i++)
+                for (Int32 i = 0; i < this.height; i++)
                 {
                     this.rlePackLengths[i] = reader.ReadInt32();
                 }
             }
         }
 
-        public void Read(PsdReader reader, int bpp, CompressionType compressionType)
+        public void Read(PsdReader reader, Int32 bpp, CompressionType compressionType)
         {
             switch (compressionType)
             {
@@ -94,34 +94,34 @@ namespace Ntreev.Library.Psd
             }
         }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.width; }
             set { this.width = value; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.height; }
             set { this.height = value; }
         }
 
-        public float Opacity
+        public Single Opacity
         {
             get { return this.opacity; }
             set { this.opacity = value; }
         }
 
-        public long Size
+        public Int64 Size
         {
             get { return this.size; }
             set { this.size = value; }
         }
 
-        private void ReadData(PsdReader reader, int bps, CompressionType compressionType, int[] rlePackLengths)
+        private void ReadData(PsdReader reader, Int32 bps, CompressionType compressionType, Int32[] rlePackLengths)
         {
-            int length = PsdUtility.DepthToPitch(bps, this.width);
-            this.data = new byte[length * this.height];
+            Int32 length = PsdUtility.DepthToPitch(bps, this.width);
+            this.data = new Byte[length * this.height];
             switch (compressionType)
             {
                 case CompressionType.Raw:
@@ -129,29 +129,29 @@ namespace Ntreev.Library.Psd
                     break;
 
                 case CompressionType.RLE:
-                    for (int i = 0; i < this.height; i++)
+                    for (Int32 i = 0; i < this.height; i++)
                     {
-                        byte[] buffer = new byte[rlePackLengths[i]];
-                        byte[] dst = new byte[length];
+                        Byte[] buffer = new Byte[rlePackLengths[i]];
+                        Byte[] dst = new Byte[length];
                         reader.Read(buffer, 0, rlePackLengths[i]);
                         DecodeRLE(buffer, dst, rlePackLengths[i], length);
-                        for (int j = 0; j < length; j++)
+                        for (Int32 j = 0; j < length; j++)
                         {
-                            this.data[(i * length) + j] = (byte)(dst[j] * this.opacity);
+                            this.data[(i * length) + j] = (Byte)(dst[j] * this.opacity);
                         }
                     }
                     break;
             }
         }
 
-        private static void DecodeRLE(byte[] src, byte[] dst, int packedLength, int unpackedLength)
+        private static void DecodeRLE(Byte[] src, Byte[] dst, Int32 packedLength, Int32 unpackedLength)
         {
-            int index = 0;
-            int num2 = 0;
-            int num3 = 0;
-            byte num4 = 0;
-            int num5 = unpackedLength;
-            int num6 = packedLength;
+            Int32 index = 0;
+            Int32 num2 = 0;
+            Int32 num3 = 0;
+            Byte num4 = 0;
+            Int32 num5 = unpackedLength;
+            Int32 num6 = packedLength;
             while ((num5 > 0) && (num6 > 0))
             {
                 num3 = src[index++];
@@ -171,7 +171,7 @@ namespace Ntreev.Library.Psd
                         }
                         if (num3 > num5)
                         {
-                            throw new Exception(string.Format("Overrun in packbits replicate of {0} chars", num3 - num5));
+                            throw new Exception(String.Format("Overrun in packbits replicate of {0} chars", num3 - num5));
                         }
                         num4 = src[index];
                         while (num3 > 0)

@@ -31,7 +31,7 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return (reader.ReadInt64() + 3) & (~3);
         }
@@ -41,14 +41,14 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             IProperties props = new DescriptorStructure(reader);
             if (props.Contains("fullPath") == true)
             {
-                Uri absoluteUri = new Uri(props["fullPath"] as string);
+                Uri absoluteUri = new Uri(props["fullPath"] as String);
                 if (File.Exists(absoluteUri.LocalPath) == true)
                     return absoluteUri;
             }
 
             if (props.Contains("relPath") == true)
             {
-                string relativePath = props["relPath"] as string;
+                String relativePath = props["relPath"] as String;
                 Uri absoluteUri = reader.Resolver.ResolveUri(reader.Uri, relativePath);
                 if (File.Exists(absoluteUri.LocalPath) == true)
                     return absoluteUri;
@@ -56,7 +56,7 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 
             if (props.Contains("Nm") == true)
             {
-                string name = props["Nm"] as string;
+                String name = props["Nm"] as String;
                 Uri absoluteUri = reader.Resolver.ResolveUri(reader.Uri, name);
                 if (File.Exists(absoluteUri.LocalPath) == true)
                     return absoluteUri;
@@ -64,24 +64,24 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 
             if (props.Contains("fullPath") == true)
             {
-                return new Uri(props["fullPath"] as string);
+                return new Uri(props["fullPath"] as String);
             }
 
             return null;
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out EmbeddedLayer value)
+        protected override void ReadValue(PsdReader reader, Object userData, out EmbeddedLayer value)
         {
             reader.ValidateSignature("liFE");
 
-            int version = reader.ReadInt32();
+            Int32 version = reader.ReadInt32();
             
             Guid id = new Guid(reader.ReadPascalString(1));
-            string name = reader.ReadString();
-            string type = reader.ReadType();
-            string creator = reader.ReadType();
+            String name = reader.ReadString();
+            String type = reader.ReadType();
+            String creator = reader.ReadType();
 
-            long length = reader.ReadInt64();
+            Int64 length = reader.ReadInt64();
             IProperties properties = reader.ReadBoolean() == true ? new DescriptorStructure(reader) : null;
             Uri absoluteUri = this.ReadAboluteUri(reader);
 

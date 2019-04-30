@@ -40,13 +40,13 @@ namespace Ntreev.Library.PsdViewer
     [Export(typeof(IShell))]
     public class ShellViewModel : TreeViewViewModel, IShell
     {
-        private string filename;
+        private String filename;
         private ICommand openFileCommand;
 
         public ShellViewModel()
         {
             this.DisplayName = "Photoshop File Viewer";
-            this.openFileCommand = new DelegateCommand((p) => this.OpenFile(p as string), (p) => this.CanOpenFile);
+            this.openFileCommand = new DelegateCommand((p) => this.OpenFile(p as String), (p) => this.CanOpenFile);
         }
 
         public void OpenFile()
@@ -76,21 +76,21 @@ namespace Ntreev.Library.PsdViewer
             }
         }
 
-        public bool CanOpenFile
+        public Boolean CanOpenFile
         {
             get
             {
-                if (string.IsNullOrEmpty(this.filename) == false)
+                if (String.IsNullOrEmpty(this.filename) == false)
                     return false;
                 return true;
             }
         }
 
-        public bool CanExport
+        public Boolean CanExport
         {
             get
             {
-                if (string.IsNullOrEmpty(this.filename) == true)
+                if (String.IsNullOrEmpty(this.filename) == true)
                     return false;
                 if (this.IsProgressing == true)
                     return false;
@@ -98,14 +98,14 @@ namespace Ntreev.Library.PsdViewer
             }
         }
 
-        public string Title
+        public String Title
         {
             get
             {
-                string title = "PsdViewer";
-                if (string.IsNullOrEmpty(this.filename) == true)
+                String title = "PsdViewer";
+                if (String.IsNullOrEmpty(this.filename) == true)
                     return title;
-                return string.Format("{0} - {1}", title, Path.GetFileName(this.filename));
+                return String.Format("{0} - {1}", title, Path.GetFileName(this.filename));
             }
         }
 
@@ -122,7 +122,7 @@ namespace Ntreev.Library.PsdViewer
 
         private void Test()
         {
-            string filename = string.Empty;
+            String filename = String.Empty;
             using (PsdDocument document = PsdDocument.Create(filename))
             {
                 foreach (var item in document.Childs)
@@ -132,7 +132,7 @@ namespace Ntreev.Library.PsdViewer
             }
         }
 
-        private void OpenFile(string filename)
+        private void OpenFile(String filename)
         {
             this.BeginProgress();
             try
@@ -153,10 +153,10 @@ namespace Ntreev.Library.PsdViewer
             }
         }
 
-        private void Export(string path)
+        private void Export(String path)
         {
             var items = EnumerableUtility.FamilyTree(this.Items, item => item.Items);
-            var layerList = new Dictionary<IPsdLayer, string>();
+            var layerList = new Dictionary<IPsdLayer, String>();
             foreach (var item in items)
             {
                 if (item is LayerItemViewModel layerViewModel && layerViewModel.HasLinkedLayer == false)
@@ -173,7 +173,7 @@ namespace Ntreev.Library.PsdViewer
                         }
                         else
                         {
-                            layerList.Add(layer, string.Empty);
+                            layerList.Add(layer, String.Empty);
                         }
                     }
                 }
@@ -184,7 +184,7 @@ namespace Ntreev.Library.PsdViewer
             {
                 var layer = item.Key;
                 var name = item.Value;
-                var filename = name == string.Empty ? Path.Combine(path, layer.Name + ".png") : Path.Combine(path, name, layer.Name + ".png");
+                var filename = name == String.Empty ? Path.Combine(path, layer.Name + ".png") : Path.Combine(path, name, layer.Name + ".png");
                 var bitmap = item.Key.GetBitmap();
                 FileUtility.Prepare(filename);
                 using (var stream = new FileStream(filename, FileMode.Create))
@@ -197,7 +197,7 @@ namespace Ntreev.Library.PsdViewer
             }
         }
 
-        private static IEnumerable<string> Recursive(Ntreev.Library.Psd.IPsdLayer layer)
+        private static IEnumerable<String> Recursive(Ntreev.Library.Psd.IPsdLayer layer)
         {
             if (layer.LinkedLayer != null)
             {

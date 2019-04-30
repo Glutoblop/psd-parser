@@ -28,18 +28,18 @@ namespace Ntreev.Library.Psd
         private readonly LayerMaskReader layerMask;
         private readonly LayerBlendingRangesReader blendingRanges;
         private readonly LayerResourceReader resources;
-        private readonly string name;
+        private readonly String name;
         private SectionType sectionType;
         private Guid placedID;
 
-        public LayerExtraRecords(LayerMaskReader layerMask, LayerBlendingRangesReader blendingRanges, LayerResourceReader resources, string name)
+        public LayerExtraRecords(LayerMaskReader layerMask, LayerBlendingRangesReader blendingRanges, LayerResourceReader resources, String name)
         {
             this.layerMask = layerMask;
             this.blendingRanges = blendingRanges;
             this.resources = resources;
             this.name = name;
 
-            this.resources.TryGetValue<string>(ref this.name, "luni.Name");
+            this.resources.TryGetValue<String>(ref this.name, "luni.Name");
             this.resources.TryGetValue<SectionType>(ref this.sectionType, "lsct.SectionType");
 
             if (this.resources.Contains("SoLd.Idnt") == true)
@@ -58,7 +58,7 @@ namespace Ntreev.Library.Psd
             get { return this.placedID; }
         }
 
-        public string Name
+        public String Name
         {
             get { return this.name; }
         }
@@ -68,7 +68,7 @@ namespace Ntreev.Library.Psd
             get { return this.layerMask.Value; }
         }
 
-        public object BlendingRanges
+        public Object BlendingRanges
         {
             get { return this.blendingRanges.Value; }
         }

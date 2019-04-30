@@ -27,15 +27,15 @@ namespace Ntreev.Library.Psd.Structures
     {
         public StructureEngineData(PsdReader reader)
         {
-            int length = reader.ReadInt32();
+            Int32 length = reader.ReadInt32();
             reader.Skip('\n', 2);
             this.ReadProperties(reader, 0, this);
         }
 
-        private void ReadProperties(PsdReader reader, int level, Properties props)
+        private void ReadProperties(PsdReader reader, Int32 level, Properties props)
         {
             reader.Skip('\t', level);
-            char c = reader.ReadChar();
+            Char c = reader.ReadChar();
             if (c == ']')
             {
                 return;
@@ -60,7 +60,7 @@ namespace Ntreev.Library.Psd.Structures
                     //assert c == 9;
                     c = reader.ReadChar();
                     //assert c == '/' : "unknown char: " + c + " on level: " + level;
-                    string name = string.Empty;
+                    String name = String.Empty;
                     while (true)
                     {
                         c = reader.ReadChar();
@@ -80,7 +80,7 @@ namespace Ntreev.Library.Psd.Structures
                     }
                     else if (c == ' ')
                     {
-                        object value = this.ReadValue(reader, level + 1);
+                        Object value = this.ReadValue(reader, level + 1);
                         props.Add(name, value);
                     }
                     else
@@ -91,9 +91,9 @@ namespace Ntreev.Library.Psd.Structures
             }
         }
 
-        private object ReadValue(PsdReader reader, int level)
+        private Object ReadValue(PsdReader reader, Int32 level)
         {
-            char c = reader.ReadChar();
+            Char c = reader.ReadChar();
             if (c == ']')
             {
                 return null;
@@ -101,18 +101,18 @@ namespace Ntreev.Library.Psd.Structures
             else if (c == '(')
             {
                 // unicode string
-                string text = string.Empty;
-                int stringSignature = reader.ReadInt16() & 0xFFFF;
+                String text = String.Empty;
+                Int32 stringSignature = reader.ReadInt16() & 0xFFFF;
                 //assert stringSignature == 0xFEFF;
                 while (true)
                 {
-                    char b1 = reader.ReadChar();
+                    Char b1 = reader.ReadChar();
                     if (b1 == ')')
                     {
                         reader.Skip('\n');
                         return text;
                     }
-                    char b2 = reader.ReadChar();
+                    Char b2 = reader.ReadChar();
                     if (b2 == '\\')
                     {
                         b2 = reader.ReadChar();
@@ -123,7 +123,7 @@ namespace Ntreev.Library.Psd.Structures
                     }
                     else
                     {
-                        text += (char)((b1 << 8) | b2);
+                        text += (Char)((b1 << 8) | b2);
                     }
                 }
             }
@@ -136,7 +136,7 @@ namespace Ntreev.Library.Psd.Structures
                 {
                     if (c == ' ')
                     {
-                        object val = this.ReadValue(reader, level);
+                        Object val = this.ReadValue(reader, level);
                         if (val == null)
                         {
                             reader.Skip('\n');
@@ -169,7 +169,7 @@ namespace Ntreev.Library.Psd.Structures
             }
             else
             {
-                string value = string.Empty;
+                String value = String.Empty;
                 do
                 {
                     value += c;
@@ -178,18 +178,18 @@ namespace Ntreev.Library.Psd.Structures
                 while (c != 10 && c != ' ');
 
                 {
-                    int f;
-                    if (int.TryParse(value, out f) == true)
+                    Int32 f;
+                    if (Int32.TryParse(value, out f) == true)
                         return f;
                 }
                 {
-                    float f;
-                    if (float.TryParse(value, out f) == true)
+                    Single f;
+                    if (Single.TryParse(value, out f) == true)
                         return f;
                 }
                 {
-                    bool f;
-                    if (bool.TryParse(value, out f) == true)
+                    Boolean f;
+                    if (Boolean.TryParse(value, out f) == true)
                         return f;
                 }
 

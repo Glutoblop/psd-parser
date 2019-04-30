@@ -27,7 +27,7 @@ namespace Ntreev.Library.Psd
     {
         public abstract PsdDocument GetDocument(Uri absoluteUri);
 
-        public virtual Uri ResolveUri(Uri baseUri, string relativeUri)
+        public virtual Uri ResolveUri(Uri baseUri, String relativeUri)
         {
             if ((baseUri == null) || (!baseUri.IsAbsoluteUri && (baseUri.OriginalString.Length == 0)))
             {

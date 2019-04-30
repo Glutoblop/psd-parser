@@ -24,66 +24,66 @@ namespace Ntreev.Library.Psd
 {
     public static class IPropertiesExtension
     {
-        public static bool Contains(this IProperties props, string property, params string[] properties)
+        public static Boolean Contains(this IProperties props, String property, params String[] properties)
         {
             return props.Contains(GeneratePropertyName(property, properties));
         }
 
-        public static T ToValue<T>(this IProperties props, string property, params string[] properties)
+        public static T ToValue<T>(this IProperties props, String property, params String[] properties)
         {
             return (T)props[GeneratePropertyName(property, properties)];
         }
 
-        public static Guid ToGuid(this IProperties props, string property, params string[] properties)
+        public static Guid ToGuid(this IProperties props, String property, params String[] properties)
         {
             return new Guid(props.ToString(property, properties));
         }
 
-        public static string ToString(this IProperties props, string property, params string[] properties)
+        public static String ToString(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<string>(props, property, properties);
+            return ToValue<String>(props, property, properties);
         }
 
-        public static byte ToByte(this IProperties props, string property, params string[] properties)
+        public static Byte ToByte(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<byte>(props, property, properties);
+            return ToValue<Byte>(props, property, properties);
         }
 
-        public static int ToInt32(this IProperties props, string property, params string[] properties)
+        public static Int32 ToInt32(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<int>(props, property, properties);
+            return ToValue<Int32>(props, property, properties);
         }
 
-        public static float ToSingle(this IProperties props, string property, params string[] properties)
+        public static Single ToSingle(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<float>(props, property, properties);
+            return ToValue<Single>(props, property, properties);
         }
 
-        public static double ToDouble(this IProperties props, string property, params string[] properties)
+        public static Double ToDouble(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<double>(props, property, properties);
+            return ToValue<Double>(props, property, properties);
         }
 
-        public static bool ToBoolean(this IProperties props, string property, params string[] properties)
+        public static Boolean ToBoolean(this IProperties props, String property, params String[] properties)
         {
-            return ToValue<bool>(props, property, properties);
+            return ToValue<Boolean>(props, property, properties);
         }
 
-        public static bool TryGetValue<T>(this IProperties props, ref T value, string property, params string[] properties)
+        public static Boolean TryGetValue<T>(this IProperties props, ref T value, String property, params String[] properties)
         {
-            string propertyName = GeneratePropertyName(property, properties);
+            String propertyName = GeneratePropertyName(property, properties);
             if (props.Contains(propertyName) == false)
                 return false;
             value = props.ToValue<T>(propertyName);
             return true;
         }
 
-        private static string GeneratePropertyName(string property, params string[] properties)
+        private static String GeneratePropertyName(String property, params String[] properties)
         {
             if (properties.Length == 0)
                 return property;
 
-            return property + "." + string.Join(".", properties);
+            return property + "." + String.Join(".", properties);
         }
     }
 }

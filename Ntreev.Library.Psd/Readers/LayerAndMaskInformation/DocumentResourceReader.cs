@@ -24,26 +24,26 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 {
     class DocumentResourceReader : LazyProperties
     {
-        private static string[] doubleTypeKeys = { "LMsk", "Lr16", "Lr32", "Layr", "Mt16", "Mt32", "Mtrn", "Alph", "FMsk", "lnk2", "FEid", "FXid", "PxSD", "lnkE", "extd", };
+        private static String[] doubleTypeKeys = { "LMsk", "Lr16", "Lr32", "Layr", "Mt16", "Mt32", "Mtrn", "Alph", "FMsk", "lnk2", "FEid", "FXid", "PxSD", "lnkE", "extd", };
 
-        public DocumentResourceReader(PsdReader reader, long length)
+        public DocumentResourceReader(PsdReader reader, Int64 length)
             : base(reader, length, null)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             Properties props = new Properties();
 
             while (reader.Position < this.EndPosition)
             {
                 reader.ValidateSignature(true);
-                string resourceID = reader.ReadType();
-                long length = this.ReadLength(reader, resourceID);
+                String resourceID = reader.ReadType();
+                Int64 length = this.ReadLength(reader, resourceID);
 
                 ResourceReaderBase resourceReader = ReaderCollector.CreateReader(resourceID, reader, length);
-                string resourceName = ReaderCollector.GetDisplayName(resourceID);
+                String resourceName = ReaderCollector.GetDisplayName(resourceID);
 
                 props[resourceName] = resourceReader;
             }
@@ -51,9 +51,9 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             value = props;
         }
 
-        private long ReadLength(PsdReader reader, string resourceID)
+        private Int64 ReadLength(PsdReader reader, String resourceID)
         {
-            long length = 0;
+            Int64 length = 0;
             if (doubleTypeKeys.Contains(resourceID) && reader.Version == 2)
             {
                 length = reader.ReadInt64();

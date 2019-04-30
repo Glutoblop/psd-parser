@@ -40,12 +40,12 @@ namespace Ntreev.Library.Psd
             
         }
 
-        public static PsdDocument Create(string filename)
+        public static PsdDocument Create(String filename)
         {
             return PsdDocument.Create(filename, new PathResolver());
         }
 
-        public static PsdDocument Create(string filename, PsdResolver resolver)
+        public static PsdDocument Create(String filename, PsdResolver resolver)
         {
             PsdDocument document = new PsdDocument();
             FileInfo fileInfo = new FileInfo(filename);
@@ -81,22 +81,22 @@ namespace Ntreev.Library.Psd
             get { return this.fileHeaderSection.Value; }
         }
 
-        public byte[] ColorModeData
+        public Byte[] ColorModeData
         {
             get { return this.colorModeDataSection.Value; }
         }
 
-        public int Width
+        public Int32 Width
         {
             get { return this.fileHeaderSection.Value.Width; }
         }
 
-        public int Height
+        public Int32 Height
         {
             get { return this.fileHeaderSection.Value.Height; }
         }
 
-        public int Depth
+        public Int32 Depth
         {
             get { return this.fileHeaderSection.Value.Depth; }
         }
@@ -121,7 +121,7 @@ namespace Ntreev.Library.Psd
             get { return this.imageResourcesSection; }
         }
 
-        public bool HasImage
+        public Boolean HasImage
         {
             get
             {
@@ -160,7 +160,7 @@ namespace Ntreev.Library.Psd
             get { return null; }
         }
 
-        bool IPsdLayer.IsClipping
+        Boolean IPsdLayer.IsClipping
         {
             get { return false; }
         }
@@ -175,27 +175,27 @@ namespace Ntreev.Library.Psd
             get { return null; }
         }
 
-        string IPsdLayer.Name
+        String IPsdLayer.Name
         {
             get { return "Document"; }
         }
 
-        int IPsdLayer.Left
+        Int32 IPsdLayer.Left
         {
             get { return 0; }
         }
 
-        int IPsdLayer.Top
+        Int32 IPsdLayer.Top
         {
             get { return 0; }
         }
 
-        int IPsdLayer.Right
+        Int32 IPsdLayer.Right
         {
             get { return this.Width; }
         }
 
-        int IPsdLayer.Bottom
+        Int32 IPsdLayer.Bottom
         {
             get { return this.Height; }
         }
@@ -210,12 +210,12 @@ namespace Ntreev.Library.Psd
             get { return this.imageDataSection.Value; }
         }
 
-        float IImageSource.Opacity
+        Single IImageSource.Opacity
         {
             get { return 1.0f; }
         }
 
-        bool IImageSource.HasMask
+        Boolean IImageSource.HasMask
         {
             get { return this.FileHeaderSection.NumberOfChannels > 4; }
         }

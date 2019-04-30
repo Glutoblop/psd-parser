@@ -23,7 +23,7 @@ using System.Text;
 
 namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
 {
-    class GlobalLayerMaskInfoReader : ValueReader<object>
+    class GlobalLayerMaskInfoReader : ValueReader<Object>
     {
         public GlobalLayerMaskInfoReader(PsdReader reader)
             : base(reader, true, null)
@@ -31,14 +31,14 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadInt32();
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out object value)
+        protected override void ReadValue(PsdReader reader, Object userData, out Object value)
         {
-            value = new object();
+            value = new Object();
         }
     }
 }

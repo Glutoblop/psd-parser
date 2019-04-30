@@ -24,13 +24,13 @@ namespace Ntreev.Library.Psd.Readers
 {
     class EmptyResourceReader : ResourceReaderBase
     {
-        public EmptyResourceReader(PsdReader reader, long length)
+        public EmptyResourceReader(PsdReader reader, Int64 length)
             : base(reader, length)
         {
 
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out IProperties value)
+        protected override void ReadValue(PsdReader reader, Object userData, out IProperties value)
         {
             value = new Properties();
         }

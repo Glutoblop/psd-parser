@@ -36,12 +36,12 @@ namespace Ntreev.Library.Psd.Readers.LayerAndMaskInformation
             return instance.Value;
         }
 
-        protected override long OnLengthGet(PsdReader reader)
+        protected override Int64 OnLengthGet(PsdReader reader)
         {
             return reader.ReadInt32();
         }
 
-        protected override void ReadValue(PsdReader reader, object userData, out LayerBlendingRanges value)
+        protected override void ReadValue(PsdReader reader, Object userData, out LayerBlendingRanges value)
         {
             value = new LayerBlendingRanges();
         }

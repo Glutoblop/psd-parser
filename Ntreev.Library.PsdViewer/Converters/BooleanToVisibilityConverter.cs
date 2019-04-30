@@ -41,13 +41,13 @@ namespace Ntreev.Library.PsdViewer.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
             if (value == null)
                 return Visibility.Collapsed;
 
-            bool visible = value == null ? false : (bool)value;
-            if (parameter as string == "invert")
+            Boolean visible = value == null ? false : (Boolean)value;
+            if (parameter as String == "invert")
                 visible = !visible;
 
             return visible == true ? Visibility.Visible : Visibility.Collapsed;
@@ -63,7 +63,7 @@ namespace Ntreev.Library.PsdViewer.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
             return ((Visibility)value) == Visibility.Visible;
         }
